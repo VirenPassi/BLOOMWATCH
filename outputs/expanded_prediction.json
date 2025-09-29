@@ -1,0 +1,34 @@
+{
+  "predicted_class": 2,
+  "confidence": 0.24880295991897583,
+  "class_confidences": {
+    "bud": 0.22318369150161743,
+    "early_bloom": 0.2236730456352234,
+    "full_bloom": 0.24880295991897583,
+    "late_bloom": 0.22266040742397308,
+    "dormant": 0.08167986571788788
+  },
+  "probabilities": [
+    0.22318369150161743,
+    0.2236730456352234,
+    0.24880295991897583,
+    0.22266040742397308,
+    0.08167986571788788
+  ],
+  "true_label": 0,
+  "class_names": [
+    "bud",
+    "early_bloom",
+    "full_bloom",
+    "late_bloom",
+    "dormant"
+  ],
+  "inference_sample": {
+    "image_path": "bud/img_035.png",
+    "plant_id": "plant_0_003",
+    "timestamp": "2024-02-10"
+  },
+  "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\expanded_bloomwatch.pt",
+  "dataset_type": "expanded",
+  "training_epochs": 20
+}

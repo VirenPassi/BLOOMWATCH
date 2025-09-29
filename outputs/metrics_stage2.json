@@ -1,0 +1,17 @@
+{
+  "model_path": "outputs/models/stage2_transfer_learning_bloomwatch.pt",
+  "evaluation_timestamp": "2025-09-28T19:24:35",
+  "validation_accuracy": 0.18297331639135958,
+  "test_accuracy": 0.16476552598225602,
+  "validation_samples": 787,
+  "test_samples": 789,
+  "model_type": "transfer_learning",
+  "fine_tuned": false,
+  "class_names": [
+    "bud",
+    "early_bloom",
+    "full_bloom",
+    "late_bloom",
+    "dormant"
+  ]
+}

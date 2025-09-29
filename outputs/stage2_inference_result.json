@@ -1,0 +1,22 @@
+{
+  "image_path": "data/expanded_dataset/plant_images/bud/bud_stage2_0001.png",
+  "predicted_class": 3,
+  "predicted_class_name": "late_bloom",
+  "confidence": 0.2670563757419586,
+  "class_confidences": {
+    "bud": 0.13726849853992462,
+    "early_bloom": 0.13242854177951813,
+    "full_bloom": 0.2601940929889679,
+    "late_bloom": 0.2670563757419586,
+    "dormant": 0.20305241644382477
+  },
+  "probabilities": [
+    0.13726849853992462,
+    0.13242854177951813,
+    0.2601940929889679,
+    0.2670563757419586,
+    0.20305241644382477
+  ],
+  "model_path": "outputs/models/stage2_fine_tuned_bloomwatch.pt",
+  "inference_timestamp": "1759163710.5043092"
+}
