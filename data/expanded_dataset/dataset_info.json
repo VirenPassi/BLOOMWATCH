@@ -1,0 +1,16 @@
+{
+  "total_images": 250,
+  "images_per_class": 50,
+  "classes": [
+    "bud",
+    "early_bloom",
+    "full_bloom",
+    "late_bloom",
+    "dormant"
+  ],
+  "ndvi_evi_pairs": 20,
+  "train_samples": 175,
+  "val_samples": 35,
+  "test_samples": 40,
+  "generated_at": "2025-09-28 15:21:03"
+}

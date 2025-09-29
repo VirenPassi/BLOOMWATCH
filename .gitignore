@@ -1,0 +1,21 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Data / outputs
+outputs/
+*.h5
+*.pt
+*.ckpt
+
+# System files
+.DS_Store
+Thumbs.db
+

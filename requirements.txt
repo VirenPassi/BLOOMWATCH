@@ -1,0 +1,56 @@
+# Core ML/DL frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Data handling and processing
+numpy>=1.24.0
+pandas>=2.0.0
+pillow>=9.5.0
+opencv-python>=4.7.0
+scikit-learn>=1.3.0
+
+# Configuration and utilities
+hydra-core>=1.3.0
+omegaconf>=2.3.0
+pyyaml>=6.0
+
+# Visualization
+matplotlib>=3.7.0
+plotly>=5.14.0
+seaborn>=0.12.0
+
+# Web framework and API
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+
+# AWS and cloud services
+boto3>=1.26.0
+botocore>=1.29.0
+
+# NASA Earthdata access
+earthaccess>=0.12.0
+
+# HDF file processing
+h5py>=3.8.0
+gdal>=3.6.0
+
+# Development and testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+flake8>=6.0.0
+isort>=5.12.0
+
+# Jupyter and experimentation
+jupyter>=1.0.0
+ipykernel>=6.25.0
+ipywidgets>=8.0.0
+
+# Logging and monitoring
+wandb>=0.15.0
+tensorboard>=2.13.0
+
+# Optional: TensorFlow support (placeholder for future)
+# tensorflow>=2.13.0
+# tensorflow-datasets>=4.9.0
