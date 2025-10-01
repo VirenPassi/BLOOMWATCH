@@ -265,8 +265,298 @@ def train_stage2_enhanced(model_type: str = "fine_tuned", fine_tune: bool = Fals
     }
 
 
+def run_inference(image_path: str, model_path: str = None, fine_tune: bool = False):
+    """Run inference on a single image."""
+    import torch
+    from PIL import Image
+    import numpy as np
+    
+    print(f"Running inference on: {image_path}")
+    
+    # Load model
+    if model_path is None:
+        model_path = OUTPUTS_DIR / "models" / f"stage2_{'fine_tuned' if fine_tune else 'transfer_learning'}_bloomwatch.pt"
+    
+    if not os.path.exists(model_path):
+        print(f"Model not found: {model_path}")
+        return None
+    
+    model = FineTunedTransferLearningCNN(num_classes=len(CLASSES), fine_tune=fine_tune)
+    model.load_state_dict(torch.load(model_path, map_location='cpu'))
+    model.eval()
+    
+    # Preprocess image
+    try:
+        img = Image.open(image_path).convert('RGB')
+        img = img.resize((224, 224))
+        
+        # Convert to tensor
+        img_array = np.array(img, dtype=np.float32) / 255.0
+        img_tensor = torch.from_numpy(img_array).permute(2, 0, 1)
+        
+        # Add NDVI/EVI channels (synthetic for inference)
+        ndvi_channel = torch.zeros_like(img_tensor[0:1])
+        evi_channel = torch.zeros_like(img_tensor[0:1])
+        
+        # Combine channels
+        combined = torch.cat([img_tensor, ndvi_channel, evi_channel], dim=0)
+        combined = combined.unsqueeze(0)  # Add batch dimension
+    except Exception as e:
+        print(f"Error preprocessing image: {e}")
+        return None
+    
+    # Run inference
+    with torch.no_grad():
+        output = model(combined)
+        probabilities = torch.softmax(output, dim=1)
+        predicted_class = torch.argmax(probabilities, dim=1).item()
+        confidence = probabilities[0][predicted_class].item()
+    
+    # Create result
+    result = {
+        "image_path": image_path,
+        "predicted_class": predicted_class,
+        "predicted_class_name": CLASSES[predicted_class],
+        "confidence": confidence,
+        "class_confidences": {
+            class_name: probabilities[0][i].item() 
+            for i, class_name in enumerate(CLASSES)
+        },
+        "probabilities": probabilities[0].tolist(),
+        "model_path": str(model_path),
+        "inference_timestamp": str(time.time())
+    }
+    
+    return result
+
+
+def generate_stage2_report(training_results: Dict, fine_tune: bool) -> Dict:
+    """Generate comprehensive Stage-2 report."""
+    print("\nGenerating Stage-2 report...")
+    
+    report = {
+        "stage2_timestamp": time.time(),
+        "pipeline_version": "Stage-2 Enhanced",
+        "dataset_overview": {},
+        "modis_data": {},
+        "plant_images": {},
+        "training_results": {},
+        "quality_assurance": {},
+        "recommendations": {}
+    }
+    
+    # Dataset overview
+    if STAGE2_METADATA.exists():
+        import pandas as pd
+        df = pd.read_csv(STAGE2_METADATA)
+        
+        report["dataset_overview"] = {
+            "total_images": len(df),
+            "classes": df['bloom_stage'].value_counts().to_dict(),
+            "train_samples": len(df[df['stage'] == 'train']),
+            "val_samples": len(df[df['stage'] == 'val']),
+            "test_samples": len(df[df['stage'] == 'test']),
+            "is_synthetic": df['is_synthetic'].iloc[0] if 'is_synthetic' in df.columns else True,
+            "aois_used": df['aoi'].unique().tolist() if 'aoi' in df.columns else [],
+            "seasons_used": df['season'].unique().tolist() if 'season' in df.columns else []
+        }
+    
+    # MODIS data info
+    if STAGE2_PROCESSED_DIR.exists():
+        ndvi_files = list(STAGE2_PROCESSED_DIR.glob("*_ndvi.npy"))
+        evi_files = list(STAGE2_PROCESSED_DIR.glob("*_evi.npy"))
+        
+        report["modis_data"] = {
+            "ndvi_files": len(ndvi_files),
+            "evi_files": len(evi_files),
+            "processed_directory": str(STAGE2_PROCESSED_DIR),
+            "total_size_gb": sum(f.stat().st_size for f in ndvi_files + evi_files) / (1024**3)
+        }
+    
+    # Plant images info
+    if STAGE2_PLANT_DIR.exists():
+        total_images = 0
+        for class_dir in STAGE2_PLANT_DIR.iterdir():
+            if class_dir.is_dir():
+                total_images += len(list(class_dir.glob("*.png")))
+        
+        report["plant_images"] = {
+            "total_images": total_images,
+            "images_directory": str(STAGE2_PLANT_DIR),
+            "total_size_gb": sum(f.stat().st_size for f in STAGE2_PLANT_DIR.rglob("*.png")) / (1024**3)
+        }
+    
+    # Training results
+    report["training_results"] = {
+        "model_type": "fine_tuned" if fine_tune else "transfer_learning",
+        "fine_tuned": fine_tune,
+        "final_train_acc": training_results.get("final_train_acc", 0),
+        "final_val_acc": training_results.get("final_val_acc", 0),
+        "best_val_acc": training_results.get("best_val_acc", 0),
+        "training_epochs": len(training_results.get("epoch_numbers", [])),
+        "batch_size": 8,
+        "training_time": training_results.get("training_time", 0)
+    }
+    
+    # Quality assurance
+    suspicious = check_suspicious_accuracy(
+        training_results.get("final_train_acc", 0), 
+        training_results.get("final_val_acc", 0)
+    )
+    
+    report["quality_assurance"] = {
+        "suspicious_accuracy": suspicious
+    }
+    
+    # Recommendations
+    val_acc = report["training_results"].get("final_val_acc", 0)
+    total_images = report["dataset_overview"].get("total_images", 0)
+    fine_tuned = report["training_results"].get("fine_tuned", False)
+    
+    if val_acc > 0.85 and total_images > 5000:
+        report["recommendations"] = {
+            "next_expansion": "YES - Excellent performance achieved",
+            "fine_tuning_recommended": not fine_tuned,
+            "next_steps": [
+                "Consider scaling to 50GB+ dataset",
+                "Add more diverse plant species",
+                "Implement temporal sequence modeling",
+                "Add real plant image collection",
+                "Consider ensemble methods"
+            ],
+            "confidence": "High"
+        }
+    elif val_acc > 0.75:
+        report["recommendations"] = {
+            "next_expansion": "MAYBE - Good performance, consider improvements",
+            "fine_tuning_recommended": not fine_tuned,
+            "next_steps": [
+                "Try fine-tuning if not already done",
+                "Increase dataset diversity",
+                "Add more AOIs for geographic coverage",
+                "Improve data augmentation strategies"
+            ],
+            "confidence": "Medium"
+        }
+    else:
+        report["recommendations"] = {
+            "next_expansion": "NO - Performance needs improvement",
+            "fine_tuning_recommended": True,
+            "next_steps": [
+                "Enable fine-tuning",
+                "Check for data quality issues",
+                "Increase training data size",
+                "Optimize hyperparameters"
+            ],
+            "confidence": "Low"
+        }
+    
+    return report
+
+
+def save_stage2_report(report: Dict):
+    """Save Stage-2 report to markdown and JSON files."""
+    # Save as JSON
+    json_report_path = OUTPUTS_DIR / "comprehensive_stage2_report_auto.json"
+    with open(json_report_path, 'w') as f:
+        json.dump(report, f, indent=2)
+    
+    # Save as Markdown
+    md_report_path = OUTPUTS_DIR / "comprehensive_stage2_report_auto.md"
+    
+    with open(md_report_path, 'w') as f:
+        f.write("# BloomWatch Stage-2 Dataset Expansion Report (Automated)\n\n")
+        f.write(f"**Generated:** {time.ctime(report['stage2_timestamp'])}\n")
+        f.write(f"**Pipeline Version:** {report['pipeline_version']}\n\n")
+        
+        # Dataset Overview
+        f.write("## Dataset Overview\n\n")
+        overview = report.get("dataset_overview", {})
+        f.write(f"- **Total Images:** {overview.get('total_images', 0):,}\n")
+        f.write(f"- **Train Samples:** {overview.get('train_samples', 0):,}\n")
+        f.write(f"- **Validation Samples:** {overview.get('val_samples', 0):,}\n")
+        f.write(f"- **Test Samples:** {overview.get('test_samples', 0):,}\n")
+        f.write(f"- **Synthetic Data:** {overview.get('is_synthetic', True)}\n")
+        f.write(f"- **AOIs Used:** {', '.join(overview.get('aois_used', []))}\n")
+        f.write(f"- **Seasons Used:** {', '.join(overview.get('seasons_used', []))}\n\n")
+        
+        # Class Distribution
+        f.write("### Class Distribution\n\n")
+        classes = overview.get('classes', {})
+        for class_name, count in classes.items():
+            f.write(f"- **{class_name}:** {count:,} images\n")
+        f.write("\n")
+        
+        # MODIS Data
+        f.write("## MODIS Data\n\n")
+        modis = report.get("modis_data", {})
+        f.write(f"- **NDVI Files:** {modis.get('ndvi_files', 0)}\n")
+        f.write(f"- **EVI Files:** {modis.get('evi_files', 0)}\n")
+        f.write(f"- **Total Size:** {modis.get('total_size_gb', 0):.2f} GB\n\n")
+        
+        # Training Results
+        f.write("## Training Results\n\n")
+        training = report.get("training_results", {})
+        f.write(f"- **Model Type:** {training.get('model_type', 'Unknown')}\n")
+        f.write(f"- **Fine-tuned:** {training.get('fine_tuned', False)}\n")
+        f.write(f"- **Final Training Accuracy:** {training.get('final_train_acc', 0):.3f}\n")
+        f.write(f"- **Final Validation Accuracy:** {training.get('final_val_acc', 0):.3f}\n")
+        f.write(f"- **Best Validation Accuracy:** {training.get('best_val_acc', 0):.3f}\n")
+        f.write(f"- **Training Epochs:** {training.get('training_epochs', 0)}\n")
+        f.write(f"- **Batch Size:** {training.get('batch_size', 0)}\n")
+        f.write(f"- **Training Time:** {training.get('training_time', 0):.1f} seconds\n\n")
+        
+        # Quality Assurance
+        f.write("## Quality Assurance\n\n")
+        qa = report.get("quality_assurance", {})
+        f.write(f"- **Suspicious Accuracy:** {qa.get('suspicious_accuracy', False)}\n\n")
+        
+        # Recommendations
+        f.write("## Recommendations\n\n")
+        rec = report.get("recommendations", {})
+        f.write(f"### Next Expansion: **{rec.get('next_expansion', 'UNKNOWN')}**\n\n")
+        f.write(f"**Fine-tuning Recommended:** {rec.get('fine_tuning_recommended', 'Unknown')}\n")
+        f.write(f"**Confidence:** {rec.get('confidence', 'Unknown')}\n\n")
+        
+        f.write("### Next Steps:\n\n")
+        for step in rec.get('next_steps', []):
+            f.write(f"- {step}\n")
+        f.write("\n")
+        
+        f.write("---\n")
+        f.write("*Report generated automatically by BloomWatch Stage-2 Pipeline*\n")
+    
+    print(f"Stage-2 report saved to: {json_report_path} and {md_report_path}")
+    return json_report_path, md_report_path
+
+
 def main():
     """Main Stage-2 training function."""
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--fine-tune', action='store_true', help='Enable fine-tuning')
+    parser.add_argument('--epochs', type=int, default=30, help='Number of epochs')
+    parser.add_argument('--inference', type=str, help='Run inference on image path')
+    parser.add_argument('--model-path', type=str, help='Path to model for inference')
+    parser.add_argument('--auto-report', action='store_true', help='Automatically generate report after training')
+    args = parser.parse_args()
+    
+    # Handle inference mode
+    if args.inference:
+        result = run_inference(args.inference, args.model_path, args.fine_tune)
+        if result:
+            # Save result
+            output_path = OUTPUTS_DIR / "stage2_inference_result.json"
+            with open(output_path, 'w') as f:
+                json.dump(result, f, indent=2)
+            
+            print(f"Inference complete!")
+            print(f"Predicted class: {result['predicted_class_name']} ({result['confidence']:.3f})")
+            print(f"Result saved to: {output_path}")
+        else:
+            print("Inference failed")
+        return
+    
     print("Starting Stage-2 Enhanced Training Pipeline")
     
     # Check for dataset leakage
@@ -323,11 +613,11 @@ def main():
         print("No dataset leakage detected")
     
     # Run training
-    fine_tune = False
+    fine_tune = args.fine_tune
     training_results = train_stage2_enhanced(
         model_type="fine_tuned" if fine_tune else "transfer_learning",
         fine_tune=fine_tune,
-        epochs=30,
+        epochs=args.epochs,
         batch_size=8
     )
     
@@ -392,7 +682,11 @@ def main():
     print(f"Best validation accuracy: {training_results['best_val_acc']:.3f}")
     print(f"Model saved to: {training_results['model_path']}")
     print(f"Prediction JSON: {prediction_path}")
-
+    
+    # Generate automated report if requested
+    if args.auto_report:
+        report = generate_stage2_report(training_results, fine_tune)
+        save_stage2_report(report)
 
 if __name__ == "__main__":
     main()

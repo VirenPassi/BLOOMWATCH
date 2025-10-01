@@ -9,6 +9,8 @@ pandas>=2.0.0
 pillow>=9.5.0
 opencv-python>=4.7.0
 scikit-learn>=1.3.0
+xarray>=2023.0.0
+rasterio>=1.3.0
 
 # Configuration and utilities
 hydra-core>=1.3.0
@@ -19,10 +21,13 @@ pyyaml>=6.0
 matplotlib>=3.7.0
 plotly>=5.14.0
 seaborn>=0.12.0
+folium>=0.14.0
 
 # Web framework and API
 fastapi>=0.100.0
 uvicorn[standard]>=0.22.0
+streamlit>=1.27.0
+streamlit-folium>=0.15.0
 
 # AWS and cloud services
 boto3>=1.26.0
@@ -34,6 +39,10 @@ earthaccess>=0.12.0
 # HDF file processing
 h5py>=3.8.0
 gdal>=3.6.0
+
+# Scalable processing
+dask>=2023.0.0
+distributed>=2023.0.0
 
 # Development and testing
 pytest>=7.4.0

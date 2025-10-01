@@ -19,6 +19,8 @@ BloomWatch is a comprehensive, modular Python project template for detecting and
 - **🧪 Fully Tested**: Complete pytest suite with unit test coverage
 - **📝 Interactive Notebooks**: Jupyter notebooks for data exploration and experiments
 - **⚙️ Configurable**: YAML-based configuration with Hydra/OmegaConf support
+- **🌐 Temporal Analysis**: Process MODIS/VIIRS time series for bloom detection
+- **📱 Web Interface**: Streamlit app for interactive result exploration
 
 ## 📁 Project Structure
 
@@ -392,6 +394,58 @@ aws configure
 # Set up Earthdata credentials
 # Visit https://urs.earthdata.nasa.gov/ to register and get credentials
 ```
+
+## 🌐 Temporal Analysis Workflow
+
+Process MODIS/VIIRS satellite data over time to detect and analyze plant bloom events:
+
+### Command Line Usage
+
+```bash
+# Basic temporal analysis
+python pipelines/bloomwatch_temporal_workflow.py \
+  --aoi "[-122.7,37.7,-121.8,38.4]" \
+  --start 2023-05-01 \
+  --end 2023-09-30 \
+  --sensor MODIS \
+  --checkpoint outputs/models/stage2_transfer_learning_bloomwatch.pt
+
+# Advanced analysis with scalability features
+python pipelines/bloomwatch_temporal_workflow.py \
+  --aoi "[-122.7,37.7,-121.8,38.4]" \
+  --start 2023-05-01 \
+  --end 2023-09-30 \
+  --sensor MODIS \
+  --checkpoint outputs/models/stage2_transfer_learning_bloomwatch.pt \
+  --inference-mode patch \
+  --patch-size 64 \
+  --chunks "time:1,y:512,x:512" \
+  --write-zarr \
+  --apply-cloud-mask \
+  --create-monthly-aggregation \
+  --predictive-days 5
+```
+
+### Web Interface
+
+Explore results interactively with the Streamlit web app:
+
+```bash
+streamlit run webapp/bloomwatch_explorer.py
+```
+
+### Features
+
+- **Multi-Sensor Support**: MODIS, VIIRS, Landsat, and Sentinel-2
+- **Spectral Indices**: Computes NDVI, EVI, NDWI, MNDWI, FAI, MCI, NDCI, CI_cy
+- **Cloud/Snow Masking**: Automatic masking of clouds and snow
+- **Temporal Analysis**: Time series processing and anomaly detection
+- **AI Inference**: Runs trained PyTorch models for bloom detection
+- **Interactive Visualizations**: Folium maps and Plotly time series
+- **Scalable Processing**: Dask/xarray support for large AOIs
+- **Predictive Modeling**: Bloom onset prediction (3-7 days ahead)
+- **Multi-Sensor Fusion**: Combines data from multiple sensors
+- **In-Situ Verification**: Integrates ground truth measurements
 
 ## 📚 Research Applications
 
