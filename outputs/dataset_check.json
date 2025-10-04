@@ -1,20 +1,20 @@
 {
-  "leakage_detected": true,
-  "train_plant_ids": 45,
-  "val_plant_ids": 15,
-  "test_plant_ids": 0,
-  "train_val_overlap": [
-    "stage1_plant_1_008",
-    "stage1_plant_4_008",
-    "stage1_plant_3_008",
-    "stage1_plant_0_008",
-    "stage1_plant_2_008"
-  ],
-  "train_test_overlap": [],
-  "val_test_overlap": [],
-  "overlap_counts": {
-    "train_val": 5,
-    "train_test": 0,
-    "val_test": 0
-  }
+ "leakage_detected": true,
+ "train_plant_ids": 45,
+ "val_plant_ids": 15,
+ "test_plant_ids": 0,
+ "train_val_overlap": [
+ "stage1_plant_1_008",
+ "stage1_plant_4_008",
+ "stage1_plant_3_008",
+ "stage1_plant_0_008",
+ "stage1_plant_2_008"
+ ],
+ "train_test_overlap": [],
+ "val_test_overlap": [],
+ "overlap_counts": {
+ "train_val": 5,
+ "train_test": 0,
+ "val_test": 0
+ }
 }

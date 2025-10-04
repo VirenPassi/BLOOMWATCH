@@ -2,7 +2,7 @@
 
 This document summarizes the completion of the BloomWatch project, a modular Python template for detecting and tracking plant blooming stages from image datasets.
 
-## ✅ Requirements Fulfillment
+## Requirements Fulfillment
 
 ### 1. Framework Support
 - **Primary**: PyTorch implementation (fully implemented)
@@ -12,17 +12,17 @@ This document summarizes the completion of the BloomWatch project, a modular Pyt
 All required directories have been created:
 ```
 BloomWatch/
-├── data/          # Dataset handling (download, preprocessing, augmentations)
-├── models/        # Model architectures (baseline CNN + advanced models)
-├── notebooks/     # Jupyter notebooks for experimentation
-├── visualization/ # Visualization tools (matplotlib/plotly)
-├── utils/         # Utility functions (config, logging, metrics)
-├── app/           # FastAPI web application
-├── tests/         # Pytest unit tests
-├── configs/       # Configuration files
-├── main.py        # Training pipeline
-├── requirements.txt
-└── README.md
+ data/ # Dataset handling (download, preprocessing, augmentations)
+ models/ # Model architectures (baseline CNN + advanced models)
+ notebooks/ # Jupyter notebooks for experimentation
+ visualization/ # Visualization tools (matplotlib/plotly)
+ utils/ # Utility functions (config, logging, metrics)
+ app/ # FastAPI web application
+ tests/ # Pytest unit tests
+ configs/ # Configuration files
+ main.py # Training pipeline
+ requirements.txt
+ README.md
 ```
 
 ### 3. Core Components Implemented
@@ -84,7 +84,7 @@ BloomWatch/
 - Proper type hints and documentation
 - Consistent coding style
 
-## 🎯 Special Features
+## Special Features
 
 1. **Modular Architecture**: Each component is independently testable and replaceable
 2. **Cloud Integration**: AWS S3 support for dataset management
@@ -94,7 +94,7 @@ BloomWatch/
 6. **Extensible Design**: Easy to add new models, datasets, and visualizations
 7. **Comprehensive Documentation**: Detailed README and inline documentation
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Training
 ```bash
@@ -117,7 +117,7 @@ python data/fetch_modis.py --start 2022-01-01 --end 2022-12-31 --bbox "70,8,90,3
 pytest tests/ -v
 ```
 
-## 📝 Conclusion
+## Conclusion
 
 The BloomWatch project template has been successfully implemented with all required components. The modular architecture makes it easy to extend for specific research needs while maintaining production readiness. The project is immediately usable for plant bloom detection research and can be adapted for other computer vision tasks.
 

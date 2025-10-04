@@ -2,7 +2,7 @@
 REM BloomWatch Final Submission Package Creator
 REM This script creates a ZIP archive of the essential BloomWatch components
 
-echo 🌸 BloomWatch Final Submission Package Creator
+echo BloomWatch Final Submission Package Creator
 echo ============================================
 
 REM Get the current directory
@@ -38,7 +38,7 @@ powershell -Command "Compress-Archive -Path '%SCRIPT_DIR%BloomWatch_Submission\*
 
 echo.
 echo ============================================
-echo ✅ Final submission package created successfully!
+echo Final submission package created successfully!
 echo Package: BloomWatch_Final_Submission.zip
 echo ============================================
 

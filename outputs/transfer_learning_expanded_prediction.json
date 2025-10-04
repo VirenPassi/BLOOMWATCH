@@ -1,45 +1,45 @@
 {
-  "predicted_class": 0,
-  "confidence": 0.9847028851509094,
-  "class_confidences": {
-    "bud": 0.9847028851509094,
-    "early_bloom": 0.006062009371817112,
-    "full_bloom": 0.002348601585254073,
-    "late_bloom": 0.002221419708803296,
-    "dormant": 0.004665033891797066
-  },
-  "probabilities": [
-    0.9847028851509094,
-    0.006062009371817112,
-    0.002348601585254073,
-    0.002221419708803296,
-    0.004665033891797066
-  ],
-  "true_label": 0,
-  "class_names": [
-    "bud",
-    "early_bloom",
-    "full_bloom",
-    "late_bloom",
-    "dormant"
-  ],
-  "inference_sample": {
-    "image_path": "bud/bud_stage1_0420.png",
-    "plant_id": "stage1_plant_0_008",
-    "timestamp": "2023-02-17"
-  },
-  "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\transfer_learning_expanded_bloomwatch.pt",
-  "dataset_type": "expanded",
-  "model_type": "transfer_learning",
-  "augmentation_strength": "medium",
-  "training_epochs": 25,
-  "batch_size": 6,
-  "quality_assurance": {
-    "leakage_detected": true,
-    "suspicious_accuracy": false,
-    "final_train_acc": 0.9876190476190476,
-    "final_val_acc": 1.0,
-    "best_val_acc": 1.0,
-    "confusion_matrix_accuracy": 1.0
-  }
+ "predicted_class": 0,
+ "confidence": 0.9847028851509094,
+ "class_confidences": {
+ "bud": 0.9847028851509094,
+ "early_bloom": 0.006062009371817112,
+ "full_bloom": 0.002348601585254073,
+ "late_bloom": 0.002221419708803296,
+ "dormant": 0.004665033891797066
+ },
+ "probabilities": [
+ 0.9847028851509094,
+ 0.006062009371817112,
+ 0.002348601585254073,
+ 0.002221419708803296,
+ 0.004665033891797066
+ ],
+ "true_label": 0,
+ "class_names": [
+ "bud",
+ "early_bloom",
+ "full_bloom",
+ "late_bloom",
+ "dormant"
+ ],
+ "inference_sample": {
+ "image_path": "bud/bud_stage1_0420.png",
+ "plant_id": "stage1_plant_0_008",
+ "timestamp": "2023-02-17"
+ },
+ "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\transfer_learning_expanded_bloomwatch.pt",
+ "dataset_type": "expanded",
+ "model_type": "transfer_learning",
+ "augmentation_strength": "medium",
+ "training_epochs": 25,
+ "batch_size": 6,
+ "quality_assurance": {
+ "leakage_detected": true,
+ "suspicious_accuracy": false,
+ "final_train_acc": 0.9876190476190476,
+ "final_val_acc": 1.0,
+ "best_val_acc": 1.0,
+ "confusion_matrix_accuracy": 1.0
+ }
 }

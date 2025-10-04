@@ -1,9 +1,9 @@
 # BloomWatch Fine-Tuning on Real Flowers Dataset - Summary
 
-## 🎯 Objective Completed
+## Objective Completed
 Successfully fine-tuned the existing BloomWatch model (trained on synthetic data with 91.2% validation accuracy) on a real-world flowers dataset to improve performance on real images.
 
-## 📊 Results Summary
+## Results Summary
 
 ### Dataset
 - **Source**: Kaggle Flowers Recognition dataset (5 classes: daisy, dandelion, rose, sunflower, tulip)
@@ -41,7 +41,7 @@ Successfully fine-tuned the existing BloomWatch model (trained on synthetic data
 - `outputs/flowers_metrics.json` - Detailed performance metrics
 - `outputs/flowers_confusion.png` - Confusion matrix visualization
 
-## 🔧 Technical Implementation
+## Technical Implementation
 
 ### Model Architecture
 - **Base**: MobileNetV2 with transfer learning
@@ -60,7 +60,7 @@ Successfully fine-tuned the existing BloomWatch model (trained on synthetic data
 - **Model adaptation**: Successfully loaded pre-trained weights and adapted to new classes
 - **CPU optimization**: All training and inference runs efficiently on CPU
 
-## 🚀 Usage Instructions
+## Usage Instructions
 
 ### 1. Download Dataset
 ```bash
@@ -88,7 +88,7 @@ model.load_state_dict(torch.load('outputs/models/stage2_real_finetuned.pt', map_
 model.eval()
 ```
 
-## 📈 Next Steps for Improvement
+## Next Steps for Improvement
 
 1. **Real Dataset**: Use actual Kaggle Flowers Recognition dataset instead of synthetic
 2. **Data Augmentation**: Add rotation, flipping, color jittering for better generalization
@@ -96,7 +96,7 @@ model.eval()
 4. **Domain Adaptation**: Use techniques like adversarial training for better domain transfer
 5. **Larger Dataset**: Collect more diverse flower images for better performance
 
-## ✅ Automation Complete
+## Automation Complete
 
 The fine-tuning pipeline is now fully automated and ready for:
 - **Hackathon submission**: Complete with web interface and documentation

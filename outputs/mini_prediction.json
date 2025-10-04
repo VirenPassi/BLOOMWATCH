@@ -1,34 +1,34 @@
 {
-  "predicted_class": 0,
-  "confidence": 0.240327388048172,
-  "class_confidences": {
-    "bud": 0.240327388048172,
-    "early_bloom": 0.22148722410202026,
-    "full_bloom": 0.21774134039878845,
-    "late_bloom": 0.1947709321975708,
-    "dormant": 0.12567313015460968
-  },
-  "probabilities": [
-    0.240327388048172,
-    0.22148722410202026,
-    0.21774134039878845,
-    0.1947709321975708,
-    0.12567313015460968
-  ],
-  "true_label": 4,
-  "class_names": [
-    "bud",
-    "early_bloom",
-    "full_bloom",
-    "late_bloom",
-    "dormant"
-  ],
-  "inference_sample": {
-    "image_path": "dormant/img_009.png",
-    "plant_id": "plant_1",
-    "timestamp": "2024-01-10"
-  },
-  "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\mini_bloomwatch.pt",
-  "dataset_type": "mini",
-  "training_epochs": 10
+ "predicted_class": 0,
+ "confidence": 0.240327388048172,
+ "class_confidences": {
+ "bud": 0.240327388048172,
+ "early_bloom": 0.22148722410202026,
+ "full_bloom": 0.21774134039878845,
+ "late_bloom": 0.1947709321975708,
+ "dormant": 0.12567313015460968
+ },
+ "probabilities": [
+ 0.240327388048172,
+ 0.22148722410202026,
+ 0.21774134039878845,
+ 0.1947709321975708,
+ 0.12567313015460968
+ ],
+ "true_label": 4,
+ "class_names": [
+ "bud",
+ "early_bloom",
+ "full_bloom",
+ "late_bloom",
+ "dormant"
+ ],
+ "inference_sample": {
+ "image_path": "dormant/img_009.png",
+ "plant_id": "plant_1",
+ "timestamp": "2024-01-10"
+ },
+ "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\mini_bloomwatch.pt",
+ "dataset_type": "mini",
+ "training_epochs": 10
 }

@@ -13,30 +13,30 @@ These files are essential for the basic functionality of the BloomWatch system:
 
 ```
 app/
-  __init__.py
-  config.py
-  endpoints.py
-  main.py
-  models.py
-  utils.py
+ __init__.py
+ config.py
+ endpoints.py
+ main.py
+ models.py
+ utils.py
 
 configs/
-  config.yaml
+ config.yaml
 
 main.py
 
 pipelines/
-  evaluate_flowers_checkpoint.py
-  finalize_submission.py
-  finetune_flowers.py
-  generate_expanded_dataset.py
-  hyperparameter_tuning.py
-  mini_bloomwatch.py
-  stage2_training.py
-  train_flowers_advanced.py
-  train_flowers_auto.py
-  train_flowers_full.py
-  train_flowers_resnet50.py
+ evaluate_flowers_checkpoint.py
+ finalize_submission.py
+ finetune_flowers.py
+ generate_expanded_dataset.py
+ hyperparameter_tuning.py
+ mini_bloomwatch.py
+ stage2_training.py
+ train_flowers_advanced.py
+ train_flowers_auto.py
+ train_flowers_full.py
+ train_flowers_resnet50.py
 
 requirements.txt
 
@@ -56,20 +56,20 @@ run_stage1_pipeline.py
 run_stage2_pipeline.py
 
 utils/
-  __init__.py
-  config_utils.py
-  data_utils.py
-  model_utils.py
-  visualization_utils.py
+ __init__.py
+ config_utils.py
+ data_utils.py
+ model_utils.py
+ visualization_utils.py
 
 visualization/
-  __init__.py
-  bloom_maps.py
-  interactive_dashboard.py
-  plot_utils.py
-  report_generator.py
-  time_series.py
-  visualization.py
+ __init__.py
+ bloom_maps.py
+ interactive_dashboard.py
+ plot_utils.py
+ report_generator.py
+ time_series.py
+ visualization.py
 ```
 
 ### OPTIONAL FILES (Development & Documentation)
@@ -91,27 +91,27 @@ TRAINING_PIPELINE.md
 UPGRADE_SUMMARY.md
 
 BloomWatch_Submission/
-  (entire directory)
+ (entire directory)
 
 data/
-  README_MODIS.md
-  README_MODIS_DATASET.md
-  README_PREPROCESSING.md
+ README_MODIS.md
+ README_MODIS_DATASET.md
+ README_PREPROCESSING.md
 
 models/
-  (model files - optional as they can be downloaded/retrained)
+ (model files - optional as they can be downloaded/retrained)
 
 notebooks/
-  01_data_exploration.ipynb
-  02_model_experiments.ipynb
-  03_results_analysis.ipynb
+ 01_data_exploration.ipynb
+ 02_model_experiments.ipynb
+ 03_results_analysis.ipynb
 
 outputs/
-  (output files - can be regenerated)
+ (output files - can be regenerated)
 
 webapp/
-  streamlit_app.py
-  __init__.py
+ streamlit_app.py
+ __init__.py
 ```
 
 ### REMOVABLE FILES (Moved to trash/)

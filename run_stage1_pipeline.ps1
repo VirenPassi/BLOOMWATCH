@@ -7,27 +7,27 @@ Write-Host "Working directory: $(Get-Location)" -ForegroundColor Gray
 # 1) Check Python availability
 Write-Host "Checking Python installation..." -ForegroundColor Cyan
 try {
-    $pythonVersion = python --version 2>&1
-    Write-Host "Python found: $pythonVersion" -ForegroundColor Green
+ $pythonVersion = python --version 2>&1
+ Write-Host "Python found: $pythonVersion" -ForegroundColor Green
 } catch {
-    Write-Error "Python not found. Please install Python 3.11+ and try again."
-    exit 1
+ Write-Error "Python not found. Please install Python 3.11+ and try again."
+ exit 1
 }
 
 # 2) Create/activate virtual environment
 Write-Host "Setting up virtual environment..." -ForegroundColor Cyan
 if (-not (Test-Path ".venv")) {
-    Write-Host "Creating virtual environment..." -ForegroundColor Yellow
-    python -m venv .venv
+ Write-Host "Creating virtual environment..." -ForegroundColor Yellow
+ python -m venv .venv
 }
 
 $venvActivate = ".venv\Scripts\Activate.ps1"
 if (Test-Path $venvActivate) {
-    . $venvActivate
-    Write-Host "Virtual environment activated" -ForegroundColor Green
+ . $venvActivate
+ Write-Host "Virtual environment activated" -ForegroundColor Green
 } else {
-    Write-Error "Failed to activate virtual environment"
-    exit 1
+ Write-Error "Failed to activate virtual environment"
+ exit 1
 }
 
 # 3) Upgrade pip and install dependencies
@@ -43,13 +43,13 @@ Write-Host "Starting Stage-1 dataset expansion pipeline..." -ForegroundColor Cya
 python run_stage1_pipeline.py
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "Stage-1 pipeline failed with exit code $LASTEXITCODE"
-    exit $LASTEXITCODE
+ Write-Error "Stage-1 pipeline failed with exit code $LASTEXITCODE"
+ exit $LASTEXITCODE
 }
 
 # 5) Display results
 Write-Host "Stage-1 pipeline completed successfully!" -ForegroundColor Green
-Write-Host "📊 Check outputs in .\outputs\" -ForegroundColor Cyan
+Write-Host " Check outputs in .\outputs\" -ForegroundColor Cyan
 Write-Host "- Stage-1 report: .\outputs\stage1_report.md" -ForegroundColor DarkGray
 Write-Host "- MODIS data: .\data\raw\MODIS\stage1\" -ForegroundColor DarkGray
 Write-Host "- Processed arrays: .\data\processed\MODIS\stage1\" -ForegroundColor DarkGray
@@ -57,7 +57,7 @@ Write-Host "- Plant images: .\data\expanded_dataset\plant_images\" -ForegroundCo
 Write-Host "- Training results: .\outputs\*_prediction.json" -ForegroundColor DarkGray
 Write-Host "- Quality assurance: .\outputs\dataset_check.json" -ForegroundColor DarkGray
 
-Write-Host "`n🎯 Next steps:" -ForegroundColor Yellow
+Write-Host "`n Next steps:" -ForegroundColor Yellow
 Write-Host "1. Review stage1_report.md for scaling recommendations" -ForegroundColor White
 Write-Host "2. Check learning curves and confusion matrix" -ForegroundColor White
 Write-Host "3. Consider scaling to 10GB dataset if recommended" -ForegroundColor White

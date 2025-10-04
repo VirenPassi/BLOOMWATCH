@@ -15,32 +15,32 @@ This enhanced mini pipeline supports both small synthetic datasets and larger ex
 ### Mini Dataset (Synthetic)
 ```
 data/
-├── mini_images/
-│   ├── bud/
-│   ├── early_bloom/
-│   ├── full_bloom/
-│   ├── late_bloom/
-│   └── dormant/
-├── processed/MINI/
-│   ├── tile_h31v08_t0.ndvi.npy
-│   └── tile_h31v08_t0.evi.npy
-└── mini_annotations.csv
+ mini_images/
+ bud/
+ early_bloom/
+ full_bloom/
+ late_bloom/
+ dormant/
+ processed/MINI/
+ tile_h31v08_t0.ndvi.npy
+ tile_h31v08_t0.evi.npy
+ mini_annotations.csv
 ```
 
 ### Expanded Dataset (Synthetic)
 ```
 data/expanded_dataset/
-├── plant_images/
-│   ├── bud/ (50 images)
-│   ├── early_bloom/ (50 images)
-│   ├── full_bloom/ (50 images)
-│   ├── late_bloom/ (50 images)
-│   └── dormant/ (50 images)
-├── ndvi/
-│   ├── ndvi_000.npy
-│   ├── evi_000.npy
-│   └── ... (20 pairs)
-└── metadata.csv
+ plant_images/
+ bud/ (50 images)
+ early_bloom/ (50 images)
+ full_bloom/ (50 images)
+ late_bloom/ (50 images)
+ dormant/ (50 images)
+ ndvi/
+ ndvi_000.npy
+ evi_000.npy
+ ... (20 pairs)
+ metadata.csv
 ```
 
 ## Usage
@@ -73,26 +73,26 @@ python pipelines/mini_bloomwatch.py
 ### Sample Prediction JSON
 ```json
 {
-  "predicted_class": 2,
-  "confidence": 0.2488,
-  "class_confidences": {
-    "bud": 0.2232,
-    "early_bloom": 0.2237,
-    "full_bloom": 0.2488,
-    "late_bloom": 0.2227,
-    "dormant": 0.0817
-  },
-  "probabilities": [0.2232, 0.2237, 0.2488, 0.2227, 0.0817],
-  "true_label": 0,
-  "class_names": ["bud", "early_bloom", "full_bloom", "late_bloom", "dormant"],
-  "inference_sample": {
-    "image_path": "bud/img_035.png",
-    "plant_id": "plant_0_003",
-    "timestamp": "2024-02-10"
-  },
-  "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\expanded_bloomwatch.pt",
-  "dataset_type": "expanded",
-  "training_epochs": 20
+ "predicted_class": 2,
+ "confidence": 0.2488,
+ "class_confidences": {
+ "bud": 0.2232,
+ "early_bloom": 0.2237,
+ "full_bloom": 0.2488,
+ "late_bloom": 0.2227,
+ "dormant": 0.0817
+ },
+ "probabilities": [0.2232, 0.2237, 0.2488, 0.2227, 0.0817],
+ "true_label": 0,
+ "class_names": ["bud", "early_bloom", "full_bloom", "late_bloom", "dormant"],
+ "inference_sample": {
+ "image_path": "bud/img_035.png",
+ "plant_id": "plant_0_003",
+ "timestamp": "2024-02-10"
+ },
+ "model_path": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\expanded_bloomwatch.pt",
+ "dataset_type": "expanded",
+ "training_epochs": 20
 }
 ```
 
@@ -139,9 +139,9 @@ python pipelines/mini_bloomwatch.py
 
 ## Hackathon Ready
 This pipeline is ready for hackathon submission with:
-- ✅ Automated end-to-end execution
-- ✅ Scientific results (NDVI + plant images → CNN → predictions)
-- ✅ BloomWatch API JSON format
-- ✅ CPU-compatible (no GPU required)
-- ✅ Demonstrable accuracy improvement with larger dataset
-- ✅ Complete documentation and outputs
+- Automated end-to-end execution
+- Scientific results (NDVI + plant images → CNN → predictions)
+- BloomWatch API JSON format
+- CPU-compatible (no GPU required)
+- Demonstrable accuracy improvement with larger dataset
+- Complete documentation and outputs

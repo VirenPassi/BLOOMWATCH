@@ -4,12 +4,12 @@ Evaluate ResNet50 flowers checkpoint on processed test split and generate output
 - Loads: outputs/models/flowers_resnet50_best.pt
 - Test data: data/processed/real_flowers/test/<class>/
 - Saves:
-  - outputs/flowers_final_metrics.json
-  - outputs/flowers_training/confusion_matrix.png
-  - outputs/flowers_summary.md (UTF-8)
+ - outputs/flowers_final_metrics.json
+ - outputs/flowers_training/confusion_matrix.png
+ - outputs/flowers_summary.md (UTF-8)
 
 Usage:
-  python pipelines/evaluate_flowers_checkpoint.py
+ python pipelines/evaluate_flowers_checkpoint.py
 """
 
 import json
@@ -43,7 +43,6 @@ CLASSES: List[str] = ["daisy", "dandelion", "rose", "sunflower", "tulip"]
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 
-
 class ResNet50FlowerClassifier(nn.Module):
 	def __init__(self, num_classes: int):
 		super().__init__()
@@ -59,7 +58,6 @@ class ResNet50FlowerClassifier(nn.Module):
 	def forward(self, x):
 		x = self.input_adaptation(x)
 		return self.backbone(x)
-
 
 def main():
 	if not CHECKPOINT.exists():
@@ -155,7 +153,6 @@ Saved to: `outputs/flowers_training/confusion_matrix.png`
 	print(f"Metrics saved to {METRICS_JSON}")
 	print(f"Summary saved to {SUMMARY_MD}")
 	print(f"Confusion matrix saved to {PLOTS_DIR / 'confusion_matrix.png'}")
-
 
 if __name__ == '__main__':
 	main()

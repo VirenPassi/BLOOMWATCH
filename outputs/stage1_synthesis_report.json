@@ -1,18 +1,18 @@
 {
-  "total_images": 3000,
-  "images_per_class": 600,
-  "classes": [
-    "bud",
-    "early_bloom",
-    "full_bloom",
-    "late_bloom",
-    "dormant"
-  ],
-  "train_samples": 2100,
-  "val_samples": 450,
-  "test_samples": 450,
-  "ndvi_files_linked": 0,
-  "is_synthetic": true,
-  "generated_at": "2025-09-28T13:02:30",
-  "output_directory": "D:\\NASA(0)\\BloomWatch\\data\\expanded_dataset\\plant_images"
+ "total_images": 3000,
+ "images_per_class": 600,
+ "classes": [
+ "bud",
+ "early_bloom",
+ "full_bloom",
+ "late_bloom",
+ "dormant"
+ ],
+ "train_samples": 2100,
+ "val_samples": 450,
+ "test_samples": 450,
+ "ndvi_files_linked": 0,
+ "is_synthetic": true,
+ "generated_at": "2025-09-28T13:02:30",
+ "output_directory": "D:\\NASA(0)\\BloomWatch\\data\\expanded_dataset\\plant_images"
 }

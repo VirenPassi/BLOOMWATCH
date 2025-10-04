@@ -1,102 +1,102 @@
 {
-  "checkpoint": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\stage2_fine_tuned_bloomwatch.pt",
-  "class_names": [
-    "bud",
-    "early_bloom",
-    "full_bloom",
-    "late_bloom",
-    "dormant"
-  ],
-  "val_accuracy": 0.7979669631512071,
-  "test_accuracy": 0.7972116603295311,
-  "val_classification_report": {
-    "bud": {
-      "precision": 0.8156424581005587,
-      "recall": 0.8957055214723927,
-      "f1-score": 0.8538011695906433,
-      "support": 163.0
-    },
-    "early_bloom": {
-      "precision": 0.8013698630136986,
-      "recall": 0.7697368421052632,
-      "f1-score": 0.785234899328859,
-      "support": 152.0
-    },
-    "full_bloom": {
-      "precision": 0.9513888888888888,
-      "recall": 0.8253012048192772,
-      "f1-score": 0.8838709677419355,
-      "support": 166.0
-    },
-    "late_bloom": {
-      "precision": 0.865546218487395,
-      "recall": 0.6602564102564102,
-      "f1-score": 0.7490909090909091,
-      "support": 156.0
-    },
-    "dormant": {
-      "precision": 0.628140703517588,
-      "recall": 0.8333333333333334,
-      "f1-score": 0.7163323782234957,
-      "support": 150.0
-    },
-    "accuracy": 0.7979669631512071,
-    "macro avg": {
-      "precision": 0.8124176264016258,
-      "recall": 0.7968666623973354,
-      "f1-score": 0.7976660647951686,
-      "support": 787.0
-    },
-    "weighted avg": {
-      "precision": 0.8156732033236349,
-      "recall": 0.7979669631512071,
-      "f1-score": 0.7999439828947,
-      "support": 787.0
-    }
-  },
-  "test_classification_report": {
-    "bud": {
-      "precision": 0.8452380952380952,
-      "recall": 0.8658536585365854,
-      "f1-score": 0.8554216867469879,
-      "support": 164.0
-    },
-    "early_bloom": {
-      "precision": 0.8169014084507042,
-      "recall": 0.7631578947368421,
-      "f1-score": 0.7891156462585034,
-      "support": 152.0
-    },
-    "full_bloom": {
-      "precision": 0.8778625954198473,
-      "recall": 0.8041958041958042,
-      "f1-score": 0.8394160583941606,
-      "support": 143.0
-    },
-    "late_bloom": {
-      "precision": 0.8852459016393442,
-      "recall": 0.6878980891719745,
-      "f1-score": 0.7741935483870968,
-      "support": 157.0
-    },
-    "dormant": {
-      "precision": 0.6548672566371682,
-      "recall": 0.8554913294797688,
-      "f1-score": 0.7418546365914789,
-      "support": 173.0
-    },
-    "accuracy": 0.7972116603295311,
-    "macro avg": {
-      "precision": 0.8160230514770319,
-      "recall": 0.7953193552241948,
-      "f1-score": 0.8000003152756456,
-      "support": 789.0
-    },
-    "weighted avg": {
-      "precision": 0.8119113495617237,
-      "recall": 0.7972116603295311,
-      "f1-score": 0.7986824720345546,
-      "support": 789.0
-    }
-  }
+ "checkpoint": "D:\\NASA(0)\\BloomWatch\\outputs\\models\\stage2_fine_tuned_bloomwatch.pt",
+ "class_names": [
+ "bud",
+ "early_bloom",
+ "full_bloom",
+ "late_bloom",
+ "dormant"
+ ],
+ "val_accuracy": 0.7979669631512071,
+ "test_accuracy": 0.7972116603295311,
+ "val_classification_report": {
+ "bud": {
+ "precision": 0.8156424581005587,
+ "recall": 0.8957055214723927,
+ "f1-score": 0.8538011695906433,
+ "support": 163.0
+ },
+ "early_bloom": {
+ "precision": 0.8013698630136986,
+ "recall": 0.7697368421052632,
+ "f1-score": 0.785234899328859,
+ "support": 152.0
+ },
+ "full_bloom": {
+ "precision": 0.9513888888888888,
+ "recall": 0.8253012048192772,
+ "f1-score": 0.8838709677419355,
+ "support": 166.0
+ },
+ "late_bloom": {
+ "precision": 0.865546218487395,
+ "recall": 0.6602564102564102,
+ "f1-score": 0.7490909090909091,
+ "support": 156.0
+ },
+ "dormant": {
+ "precision": 0.628140703517588,
+ "recall": 0.8333333333333334,
+ "f1-score": 0.7163323782234957,
+ "support": 150.0
+ },
+ "accuracy": 0.7979669631512071,
+ "macro avg": {
+ "precision": 0.8124176264016258,
+ "recall": 0.7968666623973354,
+ "f1-score": 0.7976660647951686,
+ "support": 787.0
+ },
+ "weighted avg": {
+ "precision": 0.8156732033236349,
+ "recall": 0.7979669631512071,
+ "f1-score": 0.7999439828947,
+ "support": 787.0
+ }
+ },
+ "test_classification_report": {
+ "bud": {
+ "precision": 0.8452380952380952,
+ "recall": 0.8658536585365854,
+ "f1-score": 0.8554216867469879,
+ "support": 164.0
+ },
+ "early_bloom": {
+ "precision": 0.8169014084507042,
+ "recall": 0.7631578947368421,
+ "f1-score": 0.7891156462585034,
+ "support": 152.0
+ },
+ "full_bloom": {
+ "precision": 0.8778625954198473,
+ "recall": 0.8041958041958042,
+ "f1-score": 0.8394160583941606,
+ "support": 143.0
+ },
+ "late_bloom": {
+ "precision": 0.8852459016393442,
+ "recall": 0.6878980891719745,
+ "f1-score": 0.7741935483870968,
+ "support": 157.0
+ },
+ "dormant": {
+ "precision": 0.6548672566371682,
+ "recall": 0.8554913294797688,
+ "f1-score": 0.7418546365914789,
+ "support": 173.0
+ },
+ "accuracy": 0.7972116603295311,
+ "macro avg": {
+ "precision": 0.8160230514770319,
+ "recall": 0.7953193552241948,
+ "f1-score": 0.8000003152756456,
+ "support": 789.0
+ },
+ "weighted avg": {
+ "precision": 0.8119113495617237,
+ "recall": 0.7972116603295311,
+ "f1-score": 0.7986824720345546,
+ "support": 789.0
+ }
+ }
 }

@@ -1,73 +1,73 @@
 # Configuration for training parameters and model settings
 defaults:
-  - _self_
+ - _self_
 
 # Project settings
 project:
-  name: "BloomWatch"
-  description: "Plant blooming stage detection and tracking"
-  version: "0.1.0"
+ name: "BloomWatch"
+ description: "Plant blooming stage detection and tracking"
+ version: "0.1.0"
 
 # Data configuration
 data:
-  dataset_name: "plant_bloom_dataset"
-  data_dir: "./data/raw"
-  processed_dir: "./data/processed"
-  batch_size: 32
-  num_workers: 4
-  train_split: 0.8
-  val_split: 0.1
-  test_split: 0.1
-  image_size: [224, 224]
-  augmentation:
-    rotation: 15
-    brightness: 0.2
-    contrast: 0.2
-    horizontal_flip: true
+ dataset_name: "plant_bloom_dataset"
+ data_dir: "./data/raw"
+ processed_dir: "./data/processed"
+ batch_size: 32
+ num_workers: 4
+ train_split: 0.8
+ val_split: 0.1
+ test_split: 0.1
+ image_size: [224, 224]
+ augmentation:
+ rotation: 15
+ brightness: 0.2
+ contrast: 0.2
+ horizontal_flip: true
 
 # Model configuration
 model:
-  name: "SimpleCNN"
-  num_classes: 5  # e.g., bud, early_bloom, full_bloom, late_bloom, dormant
-  dropout: 0.5
-  pretrained: true
-  backbone: "resnet18"
+ name: "SimpleCNN"
+ num_classes: 5 # e.g., bud, early_bloom, full_bloom, late_bloom, dormant
+ dropout: 0.5
+ pretrained: true
+ backbone: "resnet18"
 
 # Training configuration
 training:
-  epochs: 50
-  learning_rate: 0.001
-  weight_decay: 0.0001
-  optimizer: "adam"
-  scheduler: "step"
-  step_size: 20
-  gamma: 0.1
-  early_stopping:
-    patience: 10
-    min_delta: 0.001
+ epochs: 50
+ learning_rate: 0.001
+ weight_decay: 0.0001
+ optimizer: "adam"
+ scheduler: "step"
+ step_size: 20
+ gamma: 0.1
+ early_stopping:
+ patience: 10
+ min_delta: 0.001
 
 # Logging and checkpoints
 logging:
-  log_dir: "./logs"
-  checkpoint_dir: "./checkpoints"
-  save_every: 5
-  log_every: 10
-  use_wandb: false
-  wandb_project: "bloomwatch"
+ log_dir: "./logs"
+ checkpoint_dir: "./checkpoints"
+ save_every: 5
+ log_every: 10
+ use_wandb: false
+ wandb_project: "bloomwatch"
 
 # Hardware settings
-device: "auto"  # auto, cpu, cuda, mps
+device: "auto" # auto, cpu, cuda, mps
 mixed_precision: true
 compile_model: false
 
 # AWS S3 configuration (for dataset download)
 aws:
-  bucket_name: "your-s3-bucket"
-  region: "us-west-2"
-  prefix: "plant-datasets/"
-  
+ bucket_name: "your-s3-bucket"
+ region: "us-west-2"
+ prefix: "plant-datasets/"
+ 
 # Visualization
 visualization:
-  save_plots: true
-  plot_dir: "./plots"
-  dpi: 300
+ save_plots: true
+ plot_dir: "./plots"
+ dpi: 300

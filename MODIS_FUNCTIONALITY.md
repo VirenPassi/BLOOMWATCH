@@ -45,18 +45,18 @@ from data.fetch_modis import authenticate_earthdata, list_modis_granules, downlo
 
 # Authenticate with NASA Earthdata
 if authenticate_earthdata():
-    # List available granules
-    granules = list_modis_granules(
-        start_date="2022-01-01",
-        end_date="2022-12-31",
-        bbox=(70, 8, 90, 37)  # (west, south, east, north)
-    )
-    
-    # Download granules
-    download_granules(
-        granules=granules,
-        output_dir="data/raw/MODIS"
-    )
+ # List available granules
+ granules = list_modis_granules(
+ start_date="2022-01-01",
+ end_date="2022-12-31",
+ bbox=(70, 8, 90, 37) # (west, south, east, north)
+ )
+ 
+ # Download granules
+ download_granules(
+ granules=granules,
+ output_dir="data/raw/MODIS"
+ )
 ```
 
 ## Parameters

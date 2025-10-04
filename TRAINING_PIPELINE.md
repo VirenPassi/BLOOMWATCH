@@ -7,27 +7,27 @@ This document explains how to use the fully automated ResNet50 training pipeline
 The training pipeline implements a state-of-the-art approach for training a ResNet50 model on flower images with the following features:
 
 1. **Two-Phase Training**:
-   - Phase 1: Train only the classifier head with frozen backbone
-   - Phase 2: Fine-tune the entire network with a smaller learning rate
+ - Phase 1: Train only the classifier head with frozen backbone
+ - Phase 2: Fine-tune the entire network with a smaller learning rate
 
 2. **Advanced Data Augmentations**:
-   - Training: RandomResizedCrop, RandomHorizontalFlip, RandomRotation, RandomAffine, ColorJitter, RandomErasing
-   - Validation/Test: Only Resize and ImageNet normalization
+ - Training: RandomResizedCrop, RandomHorizontalFlip, RandomRotation, RandomAffine, ColorJitter, RandomErasing
+ - Validation/Test: Only Resize and ImageNet normalization
 
 3. **Automatic Device Detection**:
-   - Uses GPU if available, otherwise falls back to CPU
-   - Adjusts batch size automatically based on device capabilities
+ - Uses GPU if available, otherwise falls back to CPU
+ - Adjusts batch size automatically based on device capabilities
 
 4. **Comprehensive Monitoring**:
-   - Real-time training logs with loss, accuracy, and learning rate
-   - Early stopping to prevent overfitting
-   - Gradient clipping for stable training
+ - Real-time training logs with loss, accuracy, and learning rate
+ - Early stopping to prevent overfitting
+ - Gradient clipping for stable training
 
 5. **Automatic Evaluation & Reporting**:
-   - Test set evaluation upon training completion
-   - Detailed metrics saved in JSON format
-   - Confusion matrix visualization
-   - Markdown summary report
+ - Test set evaluation upon training completion
+ - Detailed metrics saved in JSON format
+ - Confusion matrix visualization
+ - Markdown summary report
 
 ## Requirements
 
@@ -47,21 +47,21 @@ All dependencies are listed in [requirements.txt](requirements.txt).
 ### Quick Start
 
 1. **Activate your virtual environment** (if using one):
-   ```bash
-   .venv\Scripts\Activate.ps1  # PowerShell
-   # or
-   .venv\Scripts\activate.bat   # Command Prompt
-   ```
+ ```bash
+ .venv\Scripts\Activate.ps1 # PowerShell
+ # or
+ .venv\Scripts\activate.bat # Command Prompt
+ ```
 
 2. **Run the training pipeline**:
-   ```bash
-   python pipelines/train_flowers_resnet50.py
-   ```
+ ```bash
+ python pipelines/train_flowers_resnet50.py
+ ```
 
-   Or use the PowerShell script:
-   ```bash
-   .\run_flowers_training.ps1
-   ```
+ Or use the PowerShell script:
+ ```bash
+ .\run_flowers_training.ps1
+ ```
 
 ### Expected Output
 
@@ -80,20 +80,20 @@ The pipeline is configured with the following parameters:
 ### Dataset Handling
 - **Physical splits**: `data/processed/real_flowers/{train,val,test}` (70/20/10)
 - **Training augmentations**:
-  - `RandomResizedCrop(224)`
-  - `RandomHorizontalFlip()`
-  - `RandomRotation(30°)`
-  - `RandomAffine(degrees=30, translate=(0.1,0.1), scale=(0.8,1.2))`
-  - `ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.05)`
-  - `RandomErasing(p=0.2)`
+ - `RandomResizedCrop(224)`
+ - `RandomHorizontalFlip()`
+ - `RandomRotation(30°)`
+ - `RandomAffine(degrees=30, translate=(0.1,0.1), scale=(0.8,1.2))`
+ - `ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.05)`
+ - `RandomErasing(p=0.2)`
 - **Validation/Test**: Only `Resize(224)` + ImageNet normalization
 - **Normalization**: mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225]
 
 ### Model Setup
 - **Architecture**: Pretrained ResNet50 (ImageNet weights)
 - **Two-phase training**:
-  - Phase 1: Freeze backbone, train classifier head (20 epochs)
-  - Phase 2: Unfreeze backbone, fine-tune full network (30 epochs)
+ - Phase 1: Freeze backbone, train classifier head (20 epochs)
+ - Phase 2: Unfreeze backbone, fine-tune full network (30 epochs)
 - **Optimizer**: AdamW
 - **LR Scheduler**: CosineAnnealingLR (Phase 1), OneCycleLR (Phase 2)
 - **Gradient clipping**: max norm = 1.0
@@ -117,17 +117,17 @@ The model will be ready for inference immediately after training completes.
 ### Common Issues
 
 1. **CUDA Out of Memory**:
-   - Reduce batch size in the script
-   - Ensure no other GPU processes are running
+ - Reduce batch size in the script
+ - Ensure no other GPU processes are running
 
 2. **Missing Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+ ```bash
+ pip install -r requirements.txt
+ ```
 
 3. **Dataset Not Found**:
-   - Ensure the dataset is in `data/processed/real_flowers/`
-   - Verify train/val/test directories exist with class subdirectories
+ - Ensure the dataset is in `data/processed/real_flowers/`
+ - Verify train/val/test directories exist with class subdirectories
 
 ### Getting Help
 

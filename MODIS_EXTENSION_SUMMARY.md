@@ -84,15 +84,15 @@ fetcher = MODISFetcher("data/raw/MODIS")
 
 # Authenticate
 if fetcher.authenticate():
-    # Search for granules
-    granules = fetcher.search_granules(
-        start_date="2022-01-01",
-        end_date="2022-12-31",
-        bbox=parse_bbox("70,8,90,37")
-    )
-    
-    # Download granules
-    downloaded = fetcher.download_granules(granules)
+ # Search for granules
+ granules = fetcher.search_granules(
+ start_date="2022-01-01",
+ end_date="2022-12-31",
+ bbox=parse_bbox("70,8,90,37")
+ )
+ 
+ # Download granules
+ downloaded = fetcher.download_granules(granules)
 ```
 
 ## Integration with BloomWatch
@@ -132,11 +132,11 @@ The MODIS functionality integrates seamlessly with the existing BloomWatch archi
 ## Verification
 
 All components have been verified:
-- ✅ Project structure is complete
-- ✅ MODIS script imports correctly
-- ✅ All required functions and methods exist
-- ✅ Documentation is complete and accurate
-- ✅ CLI interface works as expected
+- Project structure is complete
+- MODIS script imports correctly
+- All required functions and methods exist
+- Documentation is complete and accurate
+- CLI interface works as expected
 
 ## Future Enhancements
 

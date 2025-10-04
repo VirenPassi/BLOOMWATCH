@@ -5,48 +5,48 @@ The enhanced BloomWatch pipeline now includes comprehensive quality assurance fe
 
 ## Quality Assurance Features Implemented
 
-### 1. Dataset Leakage Detection ✅
+### 1. Dataset Leakage Detection 
 - **Function**: `check_dataset_leakage()`
 - **Purpose**: Detects if the same `plant_id` appears in both train and validation/test splits
 - **Output**: 
-  - Console warnings if leakage detected
-  - JSON report: `outputs/dataset_check.json`
-- **Result**: ✅ **LEAKAGE DETECTED** - 5 plant_ids overlapping between train/val splits
+ - Console warnings if leakage detected
+ - JSON report: `outputs/dataset_check.json`
+- **Result**: **LEAKAGE DETECTED** - 5 plant_ids overlapping between train/val splits
 
-### 2. Learning Curves Visualization ✅
+### 2. Learning Curves Visualization 
 - **Function**: `plot_learning_curves()`
 - **Purpose**: Track training progress with loss and accuracy curves
 - **Output**: `outputs/learning_curves.png`
 - **Features**:
-  - Train vs Validation Loss curves
-  - Train vs Validation Accuracy curves
-  - Professional styling with grids and legends
+ - Train vs Validation Loss curves
+ - Train vs Validation Accuracy curves
+ - Professional styling with grids and legends
 
-### 3. Confusion Matrix Analysis ✅
+### 3. Confusion Matrix Analysis 
 - **Function**: `compute_confusion_matrix()`
 - **Purpose**: Detailed performance analysis on validation set
 - **Outputs**:
-  - `outputs/confusion_matrix.png` - Visual heatmap
-  - `outputs/confusion_matrix.json` - Numerical data
+ - `outputs/confusion_matrix.png` - Visual heatmap
+ - `outputs/confusion_matrix.json` - Numerical data
 - **Features**:
-  - Per-class accuracy
-  - Overall accuracy
-  - Class-wise performance metrics
+ - Per-class accuracy
+ - Overall accuracy
+ - Class-wise performance metrics
 
-### 4. Suspicious Accuracy Detection ✅
+### 4. Suspicious Accuracy Detection 
 - **Function**: `check_suspicious_accuracy()`
 - **Purpose**: Detects if validation accuracy is suspiciously high vs training
 - **Threshold**: 10% difference (val > train + 10%)
-- **Result**: ✅ **No suspicious patterns detected**
+- **Result**: **No suspicious patterns detected**
 
-### 5. Automatic Re-splitting ✅
+### 5. Automatic Re-splitting 
 - **Function**: `resplit_dataset_by_plant_id()`
 - **Trigger**: When leakage detected OR suspicious accuracy patterns
 - **Action**: 
-  - Backup original split
-  - Re-split by plant_id (not individual samples)
-  - 70% train, 15% val, 15% test plant distribution
-- **Result**: ✅ **Auto re-split triggered** - Dataset reorganized by plant_id
+ - Backup original split
+ - Re-split by plant_id (not individual samples)
+ - 70% train, 15% val, 15% test plant distribution
+- **Result**: **Auto re-split triggered** - Dataset reorganized by plant_id
 
 ## Current Results
 
@@ -58,23 +58,23 @@ The enhanced BloomWatch pipeline now includes comprehensive quality assurance fe
 - **Confusion Matrix Accuracy**: 97.1%
 
 ### Quality Assurance Status
-- ✅ **Leakage Detected**: 5 overlapping plant_ids
-- ✅ **Auto Re-split**: Completed successfully
-- ✅ **Learning Curves**: Generated and saved
-- ✅ **Confusion Matrix**: Generated and saved
-- ✅ **No Suspicious Patterns**: Validation accuracy is reasonable
+- **Leakage Detected**: 5 overlapping plant_ids
+- **Auto Re-split**: Completed successfully
+- **Learning Curves**: Generated and saved
+- **Confusion Matrix**: Generated and saved
+- **No Suspicious Patterns**: Validation accuracy is reasonable
 
 ### Generated Outputs
 ```
 outputs/
-├── dataset_check.json          # Leakage analysis
-├── learning_curves.png         # Training progress
-├── confusion_matrix.png        # Performance visualization
-├── confusion_matrix.json       # Numerical metrics
-├── transfer_learning_expanded_prediction.json  # Final results
-└── models/
-    ├── transfer_learning_expanded_bloomwatch.pt
-    └── best_model.pt
+ dataset_check.json # Leakage analysis
+ learning_curves.png # Training progress
+ confusion_matrix.png # Performance visualization
+ confusion_matrix.json # Numerical metrics
+ transfer_learning_expanded_prediction.json # Final results
+ models/
+ transfer_learning_expanded_bloomwatch.pt
+ best_model.pt
 ```
 
 ## Recommendations

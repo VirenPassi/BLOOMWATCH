@@ -1,31 +1,31 @@
 {
-  "total_images": 7500,
-  "images_per_class": 1500,
-  "classes": [
-    "bud",
-    "early_bloom",
-    "full_bloom",
-    "late_bloom",
-    "dormant"
-  ],
-  "train_samples": 5250,
-  "val_samples": 1125,
-  "test_samples": 1125,
-  "ndvi_files_linked": 0,
-  "aois_used": [
-    "southeast_us",
-    "iowa_corn_belt",
-    "california_central_valley",
-    "great_plains",
-    "amazon_basin"
-  ],
-  "seasons_used": [
-    "autumn",
-    "summer",
-    "spring",
-    "winter"
-  ],
-  "is_synthetic": true,
-  "generated_at": "2025-09-28T21:12:51.027375",
-  "output_directory": "D:\\NASA(0)\\BloomWatch\\data\\expanded_dataset\\plant_images"
+ "total_images": 7500,
+ "images_per_class": 1500,
+ "classes": [
+ "bud",
+ "early_bloom",
+ "full_bloom",
+ "late_bloom",
+ "dormant"
+ ],
+ "train_samples": 5250,
+ "val_samples": 1125,
+ "test_samples": 1125,
+ "ndvi_files_linked": 0,
+ "aois_used": [
+ "southeast_us",
+ "iowa_corn_belt",
+ "california_central_valley",
+ "great_plains",
+ "amazon_basin"
+ ],
+ "seasons_used": [
+ "autumn",
+ "summer",
+ "spring",
+ "winter"
+ ],
+ "is_synthetic": true,
+ "generated_at": "2025-09-28T21:12:51.027375",
+ "output_directory": "D:\\NASA(0)\\BloomWatch\\data\\expanded_dataset\\plant_images"
 }

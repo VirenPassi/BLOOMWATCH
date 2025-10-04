@@ -6,7 +6,7 @@ Automated Flowers Training + Evaluation Pipeline
 - Then evaluates on test set and generates metrics, confusion matrix, and UTF-8 summary
 
 Usage:
-  python pipelines/train_flowers_auto.py
+ python pipelines/train_flowers_auto.py
 """
 
 import json
@@ -49,7 +49,6 @@ DEFAULT_LR = 1e-4
 BATCH_GPU = 32
 BATCH_CPU = 8
 
-
 class ResNet50FlowerClassifier(nn.Module):
 	def __init__(self, num_classes: int, pretrained: bool = True):
 		super().__init__()
@@ -73,7 +72,6 @@ class ResNet50FlowerClassifier(nn.Module):
 	def forward(self, x):
 		x = self.input_adaptation(x)
 		return self.backbone(x)
-
 
 def get_dataloaders(device):
 	train_tf = transforms.Compose([
@@ -116,7 +114,6 @@ def get_dataloaders(device):
 	val_loader = DataLoader(to_five_channels(val_base), batch_size=batch, shuffle=False, num_workers=0)
 	test_loader = DataLoader(to_five_channels(test_base), batch_size=batch, shuffle=False, num_workers=0)
 	return train_loader, val_loader, test_loader
-
 
 def train_two_phase(model, train_loader, val_loader, device):
 	criterion = nn.CrossEntropyLoss()
@@ -189,7 +186,6 @@ def train_two_phase(model, train_loader, val_loader, device):
 		model.load_state_dict(best_state)
 	return best_val
 
-
 def evaluate(model, test_loader, device):
 	model.eval()
 	targets, preds = [], []
@@ -204,7 +200,6 @@ def evaluate(model, test_loader, device):
 	cm = confusion_matrix(targets, preds)
 	report = classification_report(targets, preds, target_names=CLASSES, output_dict=True, zero_division=0)
 	return acc, cm, report
-
 
 def save_outputs(acc, cm, report, device):
 	plt.figure(figsize=(10, 8))
@@ -244,11 +239,10 @@ def save_outputs(acc, cm, report, device):
 	with open(SUMMARY_MD, 'w', encoding='utf-8') as f:
 		f.write(summary)
 
-
 def main():
-    parser = argparse.ArgumentParser(description="Auto-train flowers model with two-phase fine-tuning")
-    parser.add_argument("--force-train", action="store_true", help="Force training even if checkpoint exists")
-    args = parser.parse_args()
+ parser = argparse.ArgumentParser(description="Auto-train flowers model with two-phase fine-tuning")
+ parser.add_argument("--force-train", action="store_true", help="Force training even if checkpoint exists")
+ args = parser.parse_args()
 
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	batch = BATCH_GPU if device.type == 'cuda' else BATCH_CPU
@@ -260,27 +254,26 @@ def main():
 		return
 	train_loader, val_loader, test_loader = get_dataloaders(device)
 
-    # Train if needed
-    if CHECKPOINT.exists() and not args.force_train:
-        print(f"Checkpoint exists: {CHECKPOINT} -> skipping training (use --force-train to retrain)")
-        model = ResNet50FlowerClassifier(num_classes=len(CLASSES), pretrained=False).to(device)
-        state = torch.load(CHECKPOINT, map_location=device)
-        model.load_state_dict(state, strict=False)
-    else:
-        if CHECKPOINT.exists() and args.force_train:
-            print("--force-train specified: retraining and overwriting best checkpoint")
-        else:
-            print("No checkpoint found -> starting training")
-        model = ResNet50FlowerClassifier(num_classes=len(CLASSES), pretrained=True).to(device)
-        best_val = train_two_phase(model, train_loader, val_loader, device)
-        print(f"Best val acc: {best_val:.3f}")
+ # Train if needed
+ if CHECKPOINT.exists() and not args.force_train:
+ print(f"Checkpoint exists: {CHECKPOINT} -> skipping training (use --force-train to retrain)")
+ model = ResNet50FlowerClassifier(num_classes=len(CLASSES), pretrained=False).to(device)
+ state = torch.load(CHECKPOINT, map_location=device)
+ model.load_state_dict(state, strict=False)
+ else:
+ if CHECKPOINT.exists() and args.force_train:
+ print("--force-train specified: retraining and overwriting best checkpoint")
+ else:
+ print("No checkpoint found -> starting training")
+ model = ResNet50FlowerClassifier(num_classes=len(CLASSES), pretrained=True).to(device)
+ best_val = train_two_phase(model, train_loader, val_loader, device)
+ print(f"Best val acc: {best_val:.3f}")
 
 	# Evaluate
 	acc, cm, report = evaluate(model, test_loader, device)
 	print(f"Test accuracy: {acc:.3f}")
 	save_outputs(acc, cm, report, device)
 	print("Done. Outputs written to outputs/ directory.")
-
 
 if __name__ == '__main__':
 	main()

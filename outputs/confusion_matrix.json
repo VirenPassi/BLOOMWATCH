@@ -1,54 +1,54 @@
 {
-  "confusion_matrix": [
-    [
-      90,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      90,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
-      90,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
-      0,
-      90,
-      0
-    ],
-    [
-      0,
-      0,
-      0,
-      0,
-      90
-    ]
-  ],
-  "class_names": [
-    "bud",
-    "early_bloom",
-    "full_bloom",
-    "late_bloom",
-    "dormant"
-  ],
-  "accuracy": 1.0,
-  "per_class_accuracy": [
-    1.0,
-    1.0,
-    1.0,
-    1.0,
-    1.0
-  ]
+ "confusion_matrix": [
+ [
+ 90,
+ 0,
+ 0,
+ 0,
+ 0
+ ],
+ [
+ 0,
+ 90,
+ 0,
+ 0,
+ 0
+ ],
+ [
+ 0,
+ 0,
+ 90,
+ 0,
+ 0
+ ],
+ [
+ 0,
+ 0,
+ 0,
+ 90,
+ 0
+ ],
+ [
+ 0,
+ 0,
+ 0,
+ 0,
+ 90
+ ]
+ ],
+ "class_names": [
+ "bud",
+ "early_bloom",
+ "full_bloom",
+ "late_bloom",
+ "dormant"
+ ],
+ "accuracy": 1.0,
+ "per_class_accuracy": [
+ 1.0,
+ 1.0,
+ 1.0,
+ 1.0,
+ 1.0
+ ]
 }
